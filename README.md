@@ -1,2 +1,2 @@
 # BestDeal
-A Comparative Shopping Web Application.
+A Comparative Shopping Web Application
