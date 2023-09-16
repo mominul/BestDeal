@@ -46,8 +46,19 @@
     </style>
 </head>
 <body>
+    <h1>Ryans</h1>
     <div class="container">
-        {% for item in items %}
+        {% for item in ryans %}
+        <div class="item">
+            <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
+            <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
+            <div class="item-price">{{ item.price }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <h1>Daraz</h1>
+    <div class="container">
+        {% for item in daraz %}
         <div class="item">
             <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
             <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
