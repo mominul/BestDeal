@@ -2,12 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import json
-import time
+from selenium.webdriver.firefox.options import Options
 
-def scrape_and_save_search_results(query):
+def scrape_ryans(query):
     # Initialize the Selenium WebDriver
-    driver = webdriver.Firefox()
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
 
     # Encode the query for the URL
     encoded_query = query.replace(" ", "%20")
@@ -32,22 +33,25 @@ def scrape_and_save_search_results(query):
 
     # Now, you can collect all the search results
     result_elements = driver.find_elements(By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div/div')
-    for result_element in result_elements:
-        result_text = result_element.text
-        search_results.append(result_text)
+    total_items = len(result_elements)
+
+    for item_id in range(1, total_items):
+        try:
+            title = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[1]/a')
+            price = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[3]')
+            image = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[1]/a/img').get_attribute('src')
+            link = title.get_attribute('href')
+
+            search_results.append({
+                "title": title.text,
+                "price": price.text,
+                "image": image,
+                "link": link,
+            })
+        except:
+            pass
 
     # After scraping, close the browser window
     driver.quit()
 
-    # Filter out "Out of Stock" entries and remove "Add to Cart" string
-    filtered_data = [entry.replace("Out of Stock", "").replace("Add to Cart", "").strip() for entry in search_results if "Out of Stock" not in entry]
-
-    # Save the filtered search results to a JSON file
-    with open(f'data/{query}_filtered_search_results.json', 'w', encoding='utf-8') as json_file:
-        json.dump(filtered_data, json_file, ensure_ascii=False, indent=4)
-
-    print(f"Filtered search results for '{query}' saved to {query}_filtered_search_results.json")
-
-# Run the scraping task initially
-user_query = input("Enter your search query: ")
-scrape_and_save_search_results(user_query)
+    return search_results
