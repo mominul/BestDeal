@@ -12,8 +12,8 @@ def home(request):
         daraz = scrape_daraz(search)
 
         items = []
-        items.append(ryans)
-        items.append(daraz)
+        items += ryans
+        items += daraz
 
         data = {
             "items": items,
