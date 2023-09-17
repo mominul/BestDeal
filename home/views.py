@@ -18,7 +18,7 @@ def home(request):
 
         # Store the array in the session
         request.session['result_array'] = items
-        
+
         data = {
             "items": items,
         }
@@ -30,13 +30,16 @@ def filter_items(request):
         max_price=request.POST["max_price"]
         filtered_items = []
         result_array= request.session['result_array']
+
+        print(result_array)
         for site_data in result_array:
-            site_filtered_items = []
             if site_data['price'] <= max_price:
-                site_filtered_items.append(site_data)
-                filtered_items.append(site_filtered_items)
-    
-        return render(request, 'result.html', filtered_items)
+                filtered_items.append(site_data)
+        data = {
+            'items':filtered_items
+        }
+        return render(request, 'result.html', data)
+    # print(request.POST['max_price'])
     return render(request, 'home.html')   
 
 def run_cpu_tasks_in_parallel(tasks):
