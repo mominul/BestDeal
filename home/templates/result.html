@@ -11,6 +11,17 @@
             padding: 0;
             background-color: #f2f2f2;
         }
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow-y: scroll;
+        }
 
         .container {
             max-width: 1200px;
@@ -46,19 +57,19 @@
     </style>
 </head>
 <body>
-    <h1>Ryans</h1>
-    <div class="container">
-        {% for item in ryans %}
-        <div class="item">
-            <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
-            <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
-            <div class="item-price">{{ item.price }}</div>
-        </div>
-        {% endfor %}
+    <div class="sidebar">
+        <h2>Filter by Price</h2>
+        <form method="post">
+            <div class="price-range">
+                <label for="max-price">Max Price:</label>
+                <input type="number" id="max-price" name="max-price" placeholder="Max">
+                <button type="submit" id="filter-btn">Filter</button>
+            </div>
+        </form>
     </div>
-    <h1>Daraz</h1>
+    
     <div class="container">
-        {% for item in daraz %}
+        {% for item in items %}
         <div class="item">
             <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
             <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>

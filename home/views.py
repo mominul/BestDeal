@@ -12,13 +12,15 @@ def home(request):
         daraz = scrape_daraz(search)
 
         # Create an array containing 'ryans' and 'daraz' data
-        result_array = [ryans, daraz]
-        # Store the array in the session
-        request.session['result_array'] = result_array
+        items = []
+        items += ryans
+        items += daraz
 
+        # Store the array in the session
+        request.session['result_array'] = items
+        
         data = {
-            "ryans": ryans,
-            "daraz": daraz,
+            "items": items,
         }
         return render(request, 'result.html', data)
     return render(request, 'home.html')
