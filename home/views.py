@@ -35,12 +35,20 @@ def filter_items(request):
         for site_data in result_array:
             if site_data['price'] <= max_price:
                 filtered_items.append(site_data)
+
+        filtered_items = sort_items_by_price(filtered_items)
+
         data = {
             'items':filtered_items
         }
         return render(request, 'result.html', data)
     # print(request.POST['max_price'])
     return render(request, 'home.html')   
+
+def sort_items_by_price(filtered_items):
+    # Sort the filtered_items list in ascending order based on 'price'
+    sorted_items = sorted(filtered_items, key=lambda x: x['price'])
+    return sorted_items
 
 def run_cpu_tasks_in_parallel(tasks):
     running_tasks = [Process(target=task) for task in tasks]
