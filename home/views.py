@@ -11,9 +11,12 @@ def home(request):
         ryans = scrape_ryans(search)
         daraz = scrape_daraz(search)
 
+        items = []
+        items.append(ryans)
+        items.append(daraz)
+
         data = {
-            "ryans": ryans,
-            "daraz": daraz,
+            "items": items,
         }
         return render(request, 'result.html', data)
     return render(request, 'home.html')
