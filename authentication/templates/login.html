@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css'%}">
+  
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'L.jpg' %}" alt="">
+        </div>
+        <div class="head">
+            LOG IN YOUR ACCOUNT
+        </div>
+
+
+        <form method="post" class="p-3 mt-3">
+            {%csrf_token %}
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="psw" placeholder="Password" required>
+            </div>
+            <button class="btn mt-3">Login</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">Forget password?</a> or <a href="{% url 'signup' %}">Sign up</a>
+        </div>
+    </div>
+
+</body>
+</html>
