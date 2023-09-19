@@ -15,3 +15,16 @@ BestDeal is a powerful Comparative Shopping Web Application that empowers users 
 ## Technology Stack
 1. Backend : Python (Django), Python (LangChain)
 2. Frontend : HTML, CSS, JavaScript
+
+### Running the project
+Set the environment variable `BROWSER` to the path of the Brave browser.
+#### For Windows
+```
+set BROWSER="path/to/brave"
+```
+
+#### For macOS (Fish shell)
+```
+set -Ux BROWSER '/Applications/Brave Browser.app
+/Contents/MacOS/Brave Browser'
+```
