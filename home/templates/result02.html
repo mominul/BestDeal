@@ -1,19 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'filter.js' %}"></script>
+
     <title>BestDeal</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            background-color: #fff;
         }
         .sidebar {
-            width: 200px;
-            background-color: #333;
+            width: 250px;
+            background-color: #428585;
             color: #fff;
             padding: 20px;
             position: fixed;
@@ -33,7 +39,7 @@
         }
 
         .item {
-            background-color: #fff;
+            background-color: #8ed8d8;
             border: 1px solid #ccc;
             padding: 20px;
             text-align: center;
@@ -51,7 +57,7 @@
         }
 
         .item-price {
-            color: #007BFF;
+            color: #062d56;
             font-weight: bold;
         }
     </style>
@@ -59,24 +65,24 @@
 <body>
     <div class="sidebar">
         <h2>Filter by Price</h2>
-        <form method="post" action="http://127.0.0.1:8000/result/">
-            {% csrf_token %}
-            <div class="price-range">
+        <form id="filter-form">
+            <div class="form-group">
                 <label for="max_price">Max Price:</label>
-                <input type="number" id="max_price" name="max_price" placeholder="Max">
-                <button type="submit" id="filter-btn">Filter</button>
+                <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
             </div>
+            <button type="button" class="btn btn-info" id="filter-button">Filter</button>
         </form>
     </div>
     
     <div class="container">
         {% for item in items %}
-        <div class="item">
+        <div class="item" data-price="{{ item.price }}">
             <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
             <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
             <div class="item-price">{{ item.price }}</div>
         </div>
         {% endfor %}
     </div>
+    
 </body>
 </html>

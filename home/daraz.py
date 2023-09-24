@@ -9,7 +9,7 @@ def scrape_daraz(query):
     options = Options()
     options.add_argument("--headless") 
     # options.add_argument("--disable-gpu")  # Disable GPU acceleration
-    options.binary_location = os.environ['BROWSER']
+    #options.binary_location = os.environ['BROWSER']
     browser = webdriver.Chrome(options=options)
 
     results = []

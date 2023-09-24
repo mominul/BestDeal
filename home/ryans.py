@@ -4,12 +4,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import os
+import time
+
 
 def scrape_ryans(query):
     # Initialize the Selenium WebDriver
     options = Options()
     options.headless = True
-    options.binary_location = os.environ['BROWSER']
+    #options.binary_location = os.environ['BROWSER']
     driver = webdriver.Chrome(options=options)
 
     # Encode the query for the URL
