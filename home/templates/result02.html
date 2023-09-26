@@ -30,7 +30,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin-left: 250px;
             padding: 20px;
             display: grid;
@@ -44,6 +44,7 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative; 
         }
 
         .item img {
@@ -53,12 +54,18 @@
 
         .item-title {
             font-weight: bold;
-            margin: 10px 0;
+            margin: 10px 0; 
         }
 
         .item-price {
-            color: #062d56;
             font-weight: bold;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            max-width: 60px; 
+            z-index: 1;
         }
     </style>
 </head>
@@ -77,12 +84,14 @@
     <div class="container">
         {% for item in items %}
         <div class="item" data-price="{{ item.price }}">
-            <a href="{{ item.link }}"><img src="{{ item.image }}" alt="Product 1"></a>
+            <div class="logo">
+                <img src="{{ item.logo }}" alt="Logo">
+            </div>
+            <a href="{{ item.link }}"><img src="{{ item.image }}" alt="{{ item.title }}"></a>
             <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
             <div class="item-price">{{ item.price }}</div>
         </div>
         {% endfor %}
     </div>
-    
 </body>
 </html>

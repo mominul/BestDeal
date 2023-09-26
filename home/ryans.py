@@ -11,7 +11,7 @@ def scrape_ryans(query):
     # Initialize the Selenium WebDriver
     options = Options()
     options.headless = True
-    #options.binary_location = os.environ['BROWSER']
+    options.binary_location = os.environ['BROWSER']
     driver = webdriver.Chrome(options=options)
 
     # Encode the query for the URL
@@ -25,6 +25,7 @@ def scrape_ryans(query):
 
     # Create a list to store search results
     search_results = []
+    logo = './static/ryans.png'
 
     # Loop to keep clicking "Load More" until it's no longer available
     while True:
@@ -51,6 +52,7 @@ def scrape_ryans(query):
                 "price": price.text,
                 "image": image,
                 "link": link,
+                "logo": logo,
             })
         except:
             pass

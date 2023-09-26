@@ -9,10 +9,11 @@ def scrape_daraz(query):
     options = Options()
     options.add_argument("--headless") 
     # options.add_argument("--disable-gpu")  # Disable GPU acceleration
-    #options.binary_location = os.environ['BROWSER']
+    options.binary_location = os.environ['BROWSER']
     browser = webdriver.Chrome(options=options)
 
     results = []
+    logo = './static/daraz.png'
 
     for page in range(1, 2):
         encoded_query = query.replace(" ", "%20")
@@ -36,6 +37,7 @@ def scrape_daraz(query):
                     "price": price.text,
                     "image": image,
                     "link": link,
+                    "logo" : logo,
                 })
             except:
                 pass
