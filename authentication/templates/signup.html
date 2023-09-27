@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignUp Page</title>
+  {% load static %}
+
+  <link rel="stylesheet" href="{% static 'signup.css'%}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="{% static 'L.jpg' %}" alt="">
+        </div>
+        <div class="head">
+            Register Account
+        </div>
+        <form method="post" class="p-3 mt-3">
+            {% csrf_token %}
+            <div class="form-fields d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="fname" placeholder="First Name" required>
+            </div>
+
+            <div class="form-fields d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="lname" placeholder="Last Name" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="psw" placeholder="Password" required>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="psw-repeat" placeholder="Confirm Password" required>
+            </div>
+            <button class="btn mt-3">Register</button>
+        </form>
+        <div class="text-center">
+           <a href="{% url 'login' %}">Sign In</a>
+        </div>
+    </div>
+</body>
+</html>
