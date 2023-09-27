@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logout Page</title>
+    {% load static %}
+    <style>
+        .card {
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 20px;
+
+            width: 400px;
+            margin: 50px auto;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button-primary {
+            background-color: #007bff;
+        }
+        .button-secondary {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <from method="post">
+    <div class="card">
+        <h1>You have been successfully logged out.</h1>
+        <div class="button-container">
+            
+            <button class="button-primary"><a href="{% url 'login' %}">Login Again</button>
+            <button class="button-secondary">Home</button>
+        </from>
+        </div>
+    </div>
+</body>
+</html>
