@@ -13,6 +13,7 @@ def scrape_daraz(query):
     browser = webdriver.Chrome(options=options)
 
     results = []
+    logo = './static/daraz.png'
 
     for page in range(1, 2):
         encoded_query = query.replace(" ", "%20")
@@ -36,6 +37,7 @@ def scrape_daraz(query):
                     "price": price.text,
                     "image": image,
                     "link": link,
+                    "logo" : logo,
                 })
             except:
                 pass

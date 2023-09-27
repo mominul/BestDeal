@@ -4,6 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import os
+import time
+
 
 def scrape_ryans(query):
     # Initialize the Selenium WebDriver
@@ -23,6 +25,7 @@ def scrape_ryans(query):
 
     # Create a list to store search results
     search_results = []
+    logo = './static/ryans.png'
 
     # Loop to keep clicking "Load More" until it's no longer available
     while True:
@@ -49,6 +52,7 @@ def scrape_ryans(query):
                 "price": price.text,
                 "image": image,
                 "link": link,
+                "logo": logo,
             })
         except:
             pass

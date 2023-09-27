@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from authentication.views import login_page, logout_page, signup_view
-from home.views import home, filter_items
+from home.views import home
 
 urlpatterns = [
     path('login/', login_page, name='login'),
@@ -9,5 +9,5 @@ urlpatterns = [
     path('signup/', signup_view, name='signup'),
     path('admin/', admin.site.urls),
     path('', home),
-    path('result/', filter_items, name='result')
+    #path('result/', filter_items, name='result')
 ]
