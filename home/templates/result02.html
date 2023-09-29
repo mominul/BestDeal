@@ -11,40 +11,95 @@
 
     <title>BestDeal</title>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #fff;
         }
-        .sidebar {
-            width: 250px;
-            background-color: #428585;
-            color: #fff;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            overflow-y: scroll;
+    .sidebar {
+     background-color: #428585;
+     color: #fff;
+     height: 100vh;
+     position: sticky;
+     padding: 20px;
+       top: 0;
+       left: 0;
+      overflow-y: scroll;
+    }
+
+    .sidebar h3 {
+      margin-bottom: 9px;
+    }
+.form-group{
+ font-size: 155 px;
+
+}
+.form-control{
+   width: 129px;
+   height:40px;
+   border:none;
+    font-size: 15 px;
+    border-radius: 5px;
+
         }
 
-        .container {
-            max-width: 1250px;
-            margin-left: 250px;
+
+      .btn {
+  display: inline-block;
+  border-radius: 5px;
+  background-color: BLACK;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18 px;
+  width: 100px;
+  height:40px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin:5px auto;
+}
+
+.btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn:hover span {
+  padding-right: 25px;
+}
+
+.btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.main-content {
+           max-width: 1250px;
             padding: 20px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
+            overflow-x: scroll;
         }
-
-        .item {
+         .item {
             background-color: #8ed8d8;
             border: 1px solid #ccc;
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative; 
+            position: relative;
         }
 
         .item img {
@@ -54,34 +109,40 @@
 
         .item-title {
             font-weight: bold;
-            margin: 10px 0; 
+            margin: 10px 0;
         }
 
         .item-price {
             font-weight: bold;
         }
         .logo {
-            position: absolute;
+            position: static;
             top: 10px;
             right: 10px;
-            max-width: 60px; 
+            max-width: 60px;
             z-index: 1;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
     <div class="sidebar">
-        <h2>Filter by Price</h2>
+        <h2>Filter By Price</h2>
         <form id="filter-form">
             <div class="form-group">
                 <label for="max_price">Max Price:</label>
                 <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
             </div>
-            <button type="button" class="btn btn-info" id="filter-button">Filter</button>
+            <button type="button"  class="btn" style="vertical-align:middle" id="filter-button"><span>Filter </span></button>
         </form>
     </div>
-    
-    <div class="container">
+          </div>
+
+          <div class="col-md-9">
+    <div class="main-content">
         {% for item in items %}
         <div class="item" data-price="{{ item.price }}">
             <div class="logo">
@@ -91,6 +152,7 @@
             <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
             <div class="item-price">{{ item.price }}</div>
         </div>
+    </div>
         {% endfor %}
     </div>
 </body>
