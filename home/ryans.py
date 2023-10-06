@@ -10,7 +10,7 @@ import time
 def scrape_ryans(query):
     # Initialize the Selenium WebDriver
     options = Options()
-    options.headless = True
+    options.add_argument("--headless")
     options.binary_location = os.environ['BROWSER']
     driver = webdriver.Chrome(options=options)
 
