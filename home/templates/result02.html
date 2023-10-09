@@ -18,7 +18,7 @@
             background-color: #fff;
         }
     .sidebar {
-     background-color: #428585;
+     background-color:#3b3486;
      color: #fff;
      height: 100vh;
      position: sticky;
@@ -43,12 +43,17 @@
     border-radius: 5px;
 
         }
+.col-md-9{
+	  background:  #F2F4F8;
+    
+}
+
 
 
       .btn {
   display: inline-block;
   border-radius: 5px;
-  background-color: BLACK;
+  background-color: rgb(149, 74, 3);
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -96,7 +101,7 @@
             gap: 20px;
         }
 .item {
-            background-color: #8ed8d8;
+            background-color: #FFFFFF;;
             flex-grow:1;
             flex-basis:20;
             border: 10px solid #fff;
@@ -109,23 +114,41 @@
 .item img {
             max-width: 100%;
             height: auto;
+            text-align: center;
+            border-bottom: 3px solid rgba(55,73,187,.03);
+            flex: 0 0 220px;
+            padding: 20px;
+            margin: 0;
         }
 
 .item-title {
             
             margin: 10px 0;
-            font-size:25px;
+            font-weight: bold;
+            padding: 15px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 3px solid rgba(55,73,187,.03);
         }
 
 .item-price {
+            
+            margin: 10px 0;
             font-weight: bold;
-            font-size:25px;
+            vertical-align: middle;
+            padding: 15px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+        
         }
 .logo {
             position: static;
             top: 10px;
             right: 10px;
-            max-width: 60px;
+            max-width:100px;
+            height: 50px;
             z-index: 1;
             border-radius: 5px;
         }
