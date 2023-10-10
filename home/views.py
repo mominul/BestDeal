@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from .ryans import scrape_ryans
 from .daraz import scrape_daraz
+from .startech import scrape_startech
 
 def home(request):
     if request.POST:
@@ -10,11 +11,13 @@ def home(request):
 
         ryans = scrape_ryans(search)
         daraz = scrape_daraz(search)
+        startech = scrape_startech(search)
 
         # Create an array containing 'ryans' and 'daraz' data
         items = []
         items += ryans
         items += daraz
+        items += startech
 
         # Store the array in the session
         request.session['result_array'] = items
