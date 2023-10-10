@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from .ryans import scrape_ryans
 from .daraz import scrape_daraz
+from .startech import scrape_startech
 
 def scrape_website(query, website_func, results_queue):
     results = website_func(query)
@@ -13,6 +14,9 @@ def home(request):
     if request.POST:
         search = request.POST["search"]
 
+        ryans = scrape_ryans(search)
+        daraz = scrape_daraz(search)
+        startech = scrape_startech(search)
         # Create a multiprocessing queue to collect the results
         results_queue = Queue()
 
@@ -20,7 +24,7 @@ def home(request):
         tasks = [
             Process(target=scrape_website, args=(search, scrape_ryans, results_queue)),
             Process(target=scrape_website, args=(search, scrape_daraz, results_queue)),
-            
+            Process(target=scrape_website, args=(search, scrape_startech, results_queue)),
         ]
 
 
@@ -30,6 +34,10 @@ def home(request):
             task.join()
 
         items = []
+        items += ryans
+        items += daraz
+        items += startech
+
         while not results_queue.empty():
             items += results_queue.get()
 
