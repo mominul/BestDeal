@@ -21,6 +21,7 @@ def scrape_startech(query):
 
     # Create a list to store search results
     search_results = []
+    logo = './static/startech.png'
 
     # Loop to keep clicking "Load More" until it's no longer available
     while True:
@@ -48,6 +49,7 @@ def scrape_startech(query):
                 "price": price.text,
                 "image": image,
                 "link": link,
+                "logo": logo,
             })
         except:
             pass
