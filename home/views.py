@@ -14,9 +14,6 @@ def home(request):
     if request.POST:
         search = request.POST["search"]
 
-        ryans = scrape_ryans(search)
-        daraz = scrape_daraz(search)
-        startech = scrape_startech(search)
         # Create a multiprocessing queue to collect the results
         results_queue = Queue()
 
