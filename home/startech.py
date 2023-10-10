@@ -43,7 +43,9 @@ def scrape_startech(query):
             price = driver.find_element(By.XPATH, f'//*[@id="content"]/div[2]/div[{item_id}]/div/div[2]/div[2]/span')
             image = driver.find_element(By.XPATH, f'//*[@id="content"]/div[2]/div[{item_id}]/div/div[1]/a/img').get_attribute('src')
             link = title.get_attribute('href')
-
+            #print("startech " + price.text)
+            if (price.text == "TBA" ):
+                continue
             search_results.append({
                 "title": title.text,
                 "price": price.text,
