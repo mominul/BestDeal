@@ -2,13 +2,17 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+import os
+import time
+
 
 def scrape_ryans(query):
     # Initialize the Selenium WebDriver
     options = Options()
-    options.headless = True
-    driver = webdriver.Firefox(options=options)
+    options.add_argument("--headless")
+    options.binary_location = os.environ['BROWSER']
+    driver = webdriver.Chrome(options=options)
 
     # Encode the query for the URL
     encoded_query = query.replace(" ", "%20")
@@ -21,6 +25,7 @@ def scrape_ryans(query):
 
     # Create a list to store search results
     search_results = []
+    logo = './static/ryans.png'
 
     # Loop to keep clicking "Load More" until it's no longer available
     while True:
@@ -37,7 +42,7 @@ def scrape_ryans(query):
 
     for item_id in range(1, total_items):
         try:
-            title = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[1]/a')
+            title = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[2]/a')
             price = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[3]')
             image = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[1]/a/img').get_attribute('src')
             link = title.get_attribute('href')
@@ -47,6 +52,7 @@ def scrape_ryans(query):
                 "price": price.text,
                 "image": image,
                 "link": link,
+                "logo": logo,
             })
         except:
             pass
