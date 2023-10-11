@@ -1,11 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import os
-import time
-
 
 def scrape_ryans(query):
     # Initialize the Selenium WebDriver
@@ -20,21 +16,9 @@ def scrape_ryans(query):
     # Send a request to the search page
     driver.get(f"https://www.ryanscomputers.com/search?q={encoded_query}")
 
-    # Wait for the page to load
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div')))
-
     # Create a list to store search results
     search_results = []
     logo = './static/ryans.png'
-
-    # Loop to keep clicking "Load More" until it's no longer available
-    while True:
-        try:
-            load_more_button = driver.find_element(By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div/div[21]/button')
-            load_more_button.click()
-            time.sleep(2)  # Wait for new results to load
-        except Exception as e:
-            break
 
     # Now, you can collect all the search results
     result_elements = driver.find_elements(By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div/div')
