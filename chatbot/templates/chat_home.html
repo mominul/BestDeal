@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>BestDeal Chat</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+    <script src="https://kit.fontawesome.com/3757fb324b.js" crossorigin="anonymous"></script>
+    <style>
+        /* styles.css */
+
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a background color for the body */
+body {
+  background-color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style chat messages */
+.message {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #f0f0f0;
+  color: #000;
+  align-self: flex-start;
+}
+
+/* Style the chat input and send button */
+.chat-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.send-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0; /* Rounded right corners */
+    cursor: pointer;
+  }
+
+.clear-button button {
+  padding: 10px 20px;
+  background-color: #ff5733;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clear-button button:hover {
+  background-color: #ff4a24;
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    <main class="container">
+      <section id="chat-messages">
+        <article id="user-message">
+          <div class="message-bubble">Hello, how can I assist you?</div>
+        </article>
+        {% for item in history %}
+        <article id="bot-message">
+          <h4>
+            {{item.prompt}}
+          </h4>      
+          <p id="{{forloop.counter}}">{{item.response}}</p>
+        </article>
+        {% endfor %}
+        
+      </section>
+      <section>
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="chat-input-wrapper">
+            <textarea id="chat" name="chat" class="chat-input" placeholder="Type your message"></textarea>
+            <button type="submit" class="send-button">Send</button>
+          </div>
+          {% comment %} <textarea id="chat" name= "chat" class="chat-input" placeholder="Type your message"></textarea>
+          <input type="submit" value="Send"> {% endcomment %}
+        </form>
+        <a href="{% url 'clear_chat' %}"><button class="send-button">Clear chats</button></a>
+      </section>
+    </main>
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
+  </body>
+</html>
