@@ -33,10 +33,6 @@ def home(request):
             task.join()
 
         items = []
-        # # items += ryans
-        # # items += daraz
-        # # items += startech
-        # items += pickaboo
 
         while not results_queue.empty():
             items += results_queue.get()
