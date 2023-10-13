@@ -1,14 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+import os
 
 def scrape_startech(query):
     # Initialize the Selenium WebDriver
     options = Options()
-    options.headless = True
-    driver = webdriver.Firefox(options=options)
+    options.add_argument("--headless")
+    # Cache browser data for faster scraping
+    datadir = os.environ['HOME'] + "/BestDealData/Startech"
+    options.add_argument(f"user-data-dir={datadir}")
+    options.binary_location = os.environ['BROWSER']
+    driver = webdriver.Chrome(options=options)
 
     # Encode the query for the URL
     encoded_query = query.replace(" ", "%20")
@@ -40,7 +44,9 @@ def scrape_startech(query):
                 "link": link,
                 "logo": logo,
             })
-        except:
+        except Exception as e:
+            if 'DEBUG' in os.environ:
+                print(f"[Startech search] Exception: {e}")
             pass
 
     # After scraping, close the browser window
