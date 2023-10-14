@@ -3,196 +3,205 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{% static 'filter.js' %}"></script>
-   <title>BestDeal</title>
-    <style>
-   body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{% static 'filter.js' %}"></script>
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  <title>BestDeal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+
     .sidebar {
-     background-color:#3b3486;
-     color: #fff;
-     height: 100vh;
-     position: sticky;
-     padding: 20px;
-       top: 0;
-       left: 0;
+      background-color: #3b3486;
+      color: #fff;
+      height: 100vh;
+      position: sticky;
+      padding: 20px;
+      top: 0;
+      left: 0;
       overflow-y: scroll;
     }
 
     .sidebar h3 {
       margin-bottom: 9px;
     }
-.form-group{
- font-size: 155 px;
 
-}
-.form-control{
-   width: 129px;
-   height:40px;
-   border:none;
-    font-size: 15 px;
-    border-radius: 5px;
+    .form-group {
+      font-size: 155 px;
 
-        }
-.col-md-9{
-	  background:  #F2F4F8;
-    
-}
+    }
+
+    .form-control {
+      width: 129px;
+      height: 40px;
+      border: none;
+      font-size: 15 px;
+      border-radius: 5px;
+
+    }
+
+    .col-md-9 {
+      background: #F2F4F8;
+
+    }
 
 
 
-      .btn {
-  display: inline-block;
-  border-radius: 5px;
-  background-color: rgb(149, 74, 3);
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 18 px;
-  width: 100px;
-  height:40px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin:5px auto;
-}
+    .btn {
+      display: inline-block;
+      border-radius: 5px;
+      background-color: rgb(149, 74, 3);
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 18 px;
+      width: 100px;
+      height: 40px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px auto;
+    }
 
-.btn span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+    .btn span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
 
-.btn span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+    .btn span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
 
-.btn:hover span {
-  padding-right: 25px;
-}
+    .btn:hover span {
+      padding-right: 25px;
+    }
 
-.btn:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+    .btn:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
 
-.container {
-          display: flex;
-          flex-wrap: wrap;
-          max-width:35%;
-          max-width: 1250px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-.item {
-            background-color: #FFFFFF;;
-            flex-grow:1;
-            flex-basis:20;
-            border: 10px solid #fff;
-            padding: 2px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 35%;
+      max-width: 1250px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
 
-.item img {
-            max-width: 100%;
-            height: auto;
-            text-align: center;
-            border-bottom: 3px solid rgba(55,73,187,.03);
-            flex: 0 0 220px;
-            padding: 20px;
-            margin: 0;
-        }
+    .item {
+      background-color: #FFFFFF;
+      flex-grow: 1;
+      flex-basis: 20;
+      border: 10px solid #fff;
+      padding: 2px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
 
-.item-title {
-            
-            margin: 10px 0;
-            font-weight: bold;
-            padding: 15px;
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 3px solid rgba(55,73,187,.03);
-        }
+    .item img {
+      max-width: 100%;
+      height: auto;
+      text-align: center;
+      border-bottom: 3px solid rgba(55, 73, 187, .03);
+      flex: 0 0 220px;
+      padding: 20px;
+      margin: 0;
+    }
 
-.item-price {
-            
-            margin: 10px 0;
-            font-weight: bold;
-            vertical-align: middle;
-            padding: 15px;
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-        
-        }
-.logo {
-            position: static;
-            top: 10px;
-            right: 10px;
-            max-width:100px;
-            height: 50px;
-            z-index: 1;
-            border-radius: 5px;
-        }
+    .item-title {
 
-@media (max-width: 767px) {
+      margin: 10px 0;
+      font-weight: bold;
+      padding: 15px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 3px solid rgba(55, 73, 187, .03);
+    }
+
+    .item-price {
+
+      margin: 10px 0;
+      font-weight: bold;
+      vertical-align: middle;
+      padding: 15px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .logo {
+      position: static;
+      top: 10px;
+      right: 10px;
+      max-width: 100px;
+      height: 50px;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 767px) {
       .sidebar {
         position: static;
         height: auto;
       }
     }
 
-        /* Create the loading spinner */
-        .custom-loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+    /* Create the loading spinner */
+    .custom-loader-container {
+      bottom: 0;
+      background: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-        .custom-loader {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: custom-spin 2s linear infinite;
-        }
+    .custom-loader {
+      border: 5px solid rgba(115, 19, 19, 0.33);
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: custom-spin 2s linear infinite;
+    }
 
-        /* Keyframes for the spinning animation */
-        @keyframes custom-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    /* Keyframes for the spinning animation */
+    @keyframes custom-spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-        /* Hide the loader by default */
-        .custom-loader-container.hidden {
-            display: none;
-        }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Hide the loader by default */
+    .custom-loader-container.hidden {
+      display: none;
+    }
   </style>
 
 </head>
@@ -203,21 +212,22 @@
       <div class="col-md-3">
         <div class="sidebar">
           <h3>Filters By Price </h3>
-           <form id="filter-form">
-          <div class="form-group">
-            <label for="max_price">Max Price:</label>
-            <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
-          </div>
-             <button type="button"  class="btn" style="vertical-align:middle" id="filter-button"><span>Filter </span></button>
+          <form id="filter-form">
+            <div class="form-group">
+              <label for="max_price">Max Price:</label>
+              <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
+            </div>
+            <button type="button" class="btn" style="vertical-align:middle" id="filter-button"><span>Filter
+              </span></button>
 
-                </form>
+          </form>
         </div>
       </div>
 
 
       <div class="col-md-9">
         <div class="container" id="results">
-            <!-- To be filled up bt JS! -->
+          <!-- To be filled up bt JS! -->
         </div>
       </div>
     </div>
@@ -231,62 +241,63 @@
   <script>
     var socket = new WebSocket("ws://" + window.location.host + "/ws/search/");
 
-    socket.onopen = function() {
+    socket.onopen = function () {
       // The WebSocket connection is open and ready.
       socket.send(JSON.stringify({ query: "{{ query }}" }));
       document.getElementById('custom-loader').classList.remove('hidden');
     };
 
     socket.onmessage = function (e) {
-        var data = JSON.parse(e.data);
-        if (data.type == "finished") {
-          document.getElementById('custom-loader').classList.add('hidden');
-        } else {
-          var results = document.getElementById("results");
-          var items = data.items
+      var data = JSON.parse(e.data);
+      if (data.type == "finished") {
+        document.getElementById('custom-loader').classList.add('hidden');
+      } else {
+        var results = document.getElementById("results");
+        var items = data.items
 
-          items.forEach((item) => {
-            // Create the outer div element
-            var outerDiv = document.createElement("div");
-            outerDiv.className = "item";
-            outerDiv.setAttribute("data-price", item.price);
+        items.forEach((item) => {
+          // Create the outer div element
+          var outerDiv = document.createElement("div");
+          outerDiv.className = "item";
+          outerDiv.setAttribute("data-price", item.price);
 
-            // Create the logo div and its child image
-            var logoDiv = document.createElement("div");
-            var logoImage = document.createElement("img");
-            logoImage.src = item.logo;
-            logoImage.alt = "Logo";
-            logoDiv.appendChild(logoImage);
+          // Create the logo div and its child image
+          var logoDiv = document.createElement("div");
+          logoDiv.className = "logo";
+          var logoImage = document.createElement("img");
+          logoImage.src = item.logo;
+          logoImage.alt = "Logo";
+          logoDiv.appendChild(logoImage);
 
-            // Create the link to the product image
-            var productImageLink = document.createElement("a");
-            productImageLink.href = item.link;
-            var productImage = document.createElement("img");
-            productImage.src = item.image;
-            productImage.alt = item.title;
-            productImageLink.appendChild(productImage);
+          // Create the link to the product image
+          var productImageLink = document.createElement("a");
+          productImageLink.href = item.link;
+          var productImage = document.createElement("img");
+          productImage.src = item.image;
+          productImage.alt = item.title;
+          productImageLink.appendChild(productImage);
 
-            // Create the item title link
-            var itemTitleLink = document.createElement("a");
-            itemTitleLink.className = "item-title";
-            itemTitleLink.href = item.link;
-            itemTitleLink.textContent = item.title;
+          // Create the item title link
+          var itemTitleLink = document.createElement("a");
+          itemTitleLink.className = "item-title";
+          itemTitleLink.href = item.link;
+          itemTitleLink.textContent = item.title;
 
-            // Create the item price div
-            var itemPriceDiv = document.createElement("div");
-            itemPriceDiv.className = "item-price";
-            itemPriceDiv.textContent = item.price;
+          // Create the item price div
+          var itemPriceDiv = document.createElement("div");
+          itemPriceDiv.className = "item-price";
+          itemPriceDiv.textContent = item.price;
 
-            // Append the child elements to the outer div
-            outerDiv.appendChild(logoDiv);
-            outerDiv.appendChild(productImageLink);
-            outerDiv.appendChild(itemTitleLink);
-            outerDiv.appendChild(itemPriceDiv);
+          // Append the child elements to the outer div
+          outerDiv.appendChild(logoDiv);
+          outerDiv.appendChild(productImageLink);
+          outerDiv.appendChild(itemTitleLink);
+          outerDiv.appendChild(itemPriceDiv);
 
-            // Append the outer div to the document's body or any other desired parent element
-            results.appendChild(outerDiv);
-          })
-        }
+          // Append the outer div to the document's body or any other desired parent element
+          results.appendChild(outerDiv);
+        })
+      }
     };
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
