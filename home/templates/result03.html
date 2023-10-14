@@ -3,403 +3,446 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{% static 'filter.js' %}"></script>
-   <title>BestDeal</title>
-    <style>
-   body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{% static 'filter.js' %}"></script>
+  <title>BestDeal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
+
     .sidebar {
-     background-color:#3b3486;
-     color: #fff;
-     height: 100vh;
-     position: sticky;
-     padding: 20px;
-       top: 0;
-       left: 0;
+      background-color: #3b3486;
+      color: #fff;
+      height: 100vh;
+      position: sticky;
+      padding: 20px;
+      top: 0;
+      left: 0;
       overflow-y: scroll;
     }
 
     .sidebar h3 {
       margin-bottom: 9px;
     }
-.form-group{
- font-size: 155 px;
 
-}
-.form-control{
-   width: 129px;
-   height:40px;
-   border:none;
-    font-size: 15 px;
-    border-radius: 5px;
+    .form-group {
+      font-size: 155 px;
 
-        }
-.col-md-9{
-	  background:  #F2F4F8;
-    
-}
+    }
 
-      .btn {
-  display: inline-block;
-  border-radius: 5px;
-  background-color: rgb(149, 74, 3);
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 18 px;
-  width: 100px;
-  height:40px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin:5px auto;
-}
+    .form-control {
+      width: 129px;
+      height: 40px;
+      border: none;
+      font-size: 15 px;
+      border-radius: 5px;
 
-.btn span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+    }
 
-.btn span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+    .col-md-9 {
+      background: #F2F4F8;
 
-.btn:hover span {
-  padding-right: 25px;
-}
+    }
 
-.btn:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+    .btn {
+      display: inline-block;
+      border-radius: 5px;
+      background-color: rgb(149, 74, 3);
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 18 px;
+      width: 100px;
+      height: 40px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px auto;
+    }
 
-.container {
-          display: flex;
-          flex-wrap: wrap;
-          max-width:35%;
-          max-width: 1250px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-.item {
-            background-color: #FFFFFF;;
-            flex-grow:1;
-            flex-basis:20;
-            border: 10px solid #fff;
-            padding: 2px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
+    .btn span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
 
-.item img {
-            max-width: 100%;
-            height: auto;
-            text-align: center;
-            border-bottom: 3px solid rgba(55,73,187,.03);
-            flex: 0 0 220px;
-            padding: 20px;
-            margin: 0;
-        }
+    .btn span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
 
-.item-title {
-            
-            margin: 10px 0;
-            font-weight: bold;
-            padding: 15px;
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 3px solid rgba(55,73,187,.03);
-        }
+    .btn:hover span {
+      padding-right: 25px;
+    }
 
-.item-price {
-            
-            margin: 10px 0;
-            font-weight: bold;
-            vertical-align: middle;
-            padding: 15px;
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-        
-        }
-.logo {
-            position: static;
-            top: 10px;
-            right: 10px;
-            max-width:100px;
-            height: 50px;
-            z-index: 1;
-            border-radius: 5px;
-        }
+    .btn:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
 
-@media (max-width: 767px) {
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 35%;
+      max-width: 1250px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .item {
+      background-color: #FFFFFF;
+      flex-grow: 1;
+      flex-basis: 20;
+      border: 10px solid #fff;
+      padding: 2px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .item img {
+      max-width: 100%;
+      height: auto;
+      text-align: center;
+      border-bottom: 3px solid rgba(55, 73, 187, .03);
+      flex: 0 0 220px;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .item-title {
+
+      margin: 10px 0;
+      font-weight: bold;
+      padding: 15px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 3px solid rgba(55, 73, 187, .03);
+    }
+
+    .item-price {
+
+      margin: 10px 0;
+      font-weight: bold;
+      vertical-align: middle;
+      padding: 15px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .logo {
+      position: static;
+      top: 10px;
+      right: 10px;
+      max-width: 100px;
+      height: 50px;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 767px) {
       .sidebar {
         position: static;
         height: auto;
       }
     }
 
-        /* Create the loading spinner */
-        .custom-loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+    /* Create the loading spinner */
+    .custom-loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-        .custom-loader {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: custom-spin 2s linear infinite;
-        }
+    .custom-loader {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: custom-spin 2s linear infinite;
+    }
 
-        /* Keyframes for the spinning animation */
-        @keyframes custom-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    /* Keyframes for the spinning animation */
+    @keyframes custom-spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-        /* Hide the loader by default */
-        .custom-loader-container.hidden {
-            display: none;
-        }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-          /* Import Google font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-        .chatbot-toggler {
-  position: fixed;
-  bottom: 30px;
-  right: 35px;
-  outline: none;
-  border: none;
-  height: 50px;
-  width: 50px;
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #724ae8;
-  transition: all 0.2s ease;
-  z-index: 1000;
-}
-body.show-chatbot .chatbot-toggler {
-  transform: rotate(90deg);
-}
-.chatbot-toggler span {
-  color: #fff;
-  position: absolute;
-}
-.chatbot-toggler span:last-child,
-body.show-chatbot .chatbot-toggler span:first-child  {
-  opacity: 0;
-}
-body.show-chatbot .chatbot-toggler span:last-child {
-  opacity: 1;
-}
-.chatbot {
-  position: fixed;
-    background: #E3F2FD;
-  right: 35px;
-  bottom: 90px;
-  width: 420px;
-  height: 80%;
-  background: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.5);
-  transform-origin: bottom right;
-  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
-              0 32px 64px -48px rgba(0,0,0,0.5);
-  transition: all 0.1s ease;
-  z-index: 1000;
-}
-body.show-chatbot .chatbot {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-.chatbot header {
-  padding: 16px 0;
-  position: relative;
-  text-align: center;
-  color: #fff;
-  background: #724ae8;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.chatbot header span {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  display: none;
-  cursor: pointer;
-  transform: translateY(-50%);
-}
-header h2 {
-  font-size: 1.4rem;
-}
-.chatbot .chatbox {
-  overflow-y: auto;
-  height: 510px;
-  padding: 30px 20px 100px;
+    /* Hide the loader by default */
+    .custom-loader-container.hidden {
+      display: none;
+    }
 
-}
-.chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
-  width: 6px;
-}
-.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
-  background: #fff;
-  border-radius: 25px;
-}
-.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 25px;
-}
-.chatbox .chat {
-  display: flex;
-  list-style: none;
-}
-.chatbox .outgoing {
-  margin: 20px 0;
-  justify-content: flex-end;
-}
-.chatbox .incoming span {
-  width: 32px;
-  height: 32px;
-  color: #fff;
-  cursor: default;
-  text-align: center;
-  line-height: 32px;
-  align-self: flex-end;
-  background: #724ae8;
-  border-radius: 4px;
-  margin: 0 10px 7px 0;
-}
-.chatbox .chat p {
-  white-space: pre-wrap;
-  padding: 12px 16px;
-  border-radius: 10px 10px 0 10px;
-  max-width: 75%;
-  color: #fff;
-  font-size: 0.95rem;
-  background: #724ae8;
-}
-.chatbox .incoming p {
-  border-radius: 10px 10px 10px 0;
-}
-.chatbox .chat p.error {
-  color: #721c24;
-  background: #f8d7da;
-}
-.chatbox .incoming p {
-  color: #000;
-  background: #f2f2f2;
-}
-.chatbot .chat-input {
-  display: flex;
-  gap: 5px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #fff;
-  padding: 3px 20px;
-  border-top: 1px solid #ddd;
-}
-.chat-input textarea {
-  height: 55px;
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  max-height: 180px;
-  padding: 15px 15px 15px 0;
-  font-size: 0.95rem;
-}
-.chat-input span {
-  align-self: flex-end;
-  color: #724ae8;
-  cursor: pointer;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  visibility: hidden;
-  font-size: 1.35rem;
-}
-.chat-input textarea:valid ~ span {
-  visibility: visible;
-}
+    /* Import Google font - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-.user-img {
-    display: inline-block;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    background: #2671ff;
-    margin: 0 10px 10px 0;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-@media (max-width: 490px) {
-  .chatbot-toggler {
-    right: 20px;
-    bottom: 20px;
-  }
-  .chatbot {
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    border-radius: 0;
-    width: 100%;
-  }
-  .chatbot .chatbox {
-    height: 90%;
-    padding: 25px 15px 100px;
-  }
-  .chatbot .chat-input {
-    padding: 5px 15px;
-  }
-  .chatbot header span {
-    display: block;
-  }
-}
+    .chatbot-toggler {
+      position: fixed;
+      bottom: 30px;
+      right: 35px;
+      outline: none;
+      border: none;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #724ae8;
+      transition: all 0.2s ease;
+      z-index: 1000;
+    }
+
+    body.show-chatbot .chatbot-toggler {
+      transform: rotate(90deg);
+    }
+
+    .chatbot-toggler span {
+      color: #fff;
+      position: absolute;
+    }
+
+    .chatbot-toggler span:last-child,
+    body.show-chatbot .chatbot-toggler span:first-child {
+      opacity: 0;
+    }
+
+    body.show-chatbot .chatbot-toggler span:last-child {
+      opacity: 1;
+    }
+
+    .chatbot {
+      position: fixed;
+      background: #E3F2FD;
+      right: 35px;
+      bottom: 90px;
+      width: 420px;
+      height: 80%;
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.5);
+      transform-origin: bottom right;
+      box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+        0 32px 64px -48px rgba(0, 0, 0, 0.5);
+      transition: all 0.1s ease;
+      z-index: 1000;
+    }
+
+    body.show-chatbot .chatbot {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .chatbot header {
+      padding: 16px 0;
+      position: relative;
+      text-align: center;
+      color: #fff;
+      background: #724ae8;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot header span {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      display: none;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    header h2 {
+      font-size: 1.4rem;
+    }
+
+    .chatbot .chatbox {
+      overflow-y: auto;
+      height: 510px;
+      padding: 30px 20px 100px;
+
+    }
+
+    .chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+      background: #fff;
+      border-radius: 25px;
+    }
+
+    .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 25px;
+    }
+
+    .chatbox .chat {
+      display: flex;
+      list-style: none;
+    }
+
+    .chatbox .outgoing {
+      margin: 20px 0;
+      justify-content: flex-end;
+    }
+
+    .chatbox .incoming span {
+      width: 32px;
+      height: 32px;
+      color: #fff;
+      cursor: default;
+      text-align: center;
+      line-height: 32px;
+      align-self: flex-end;
+      background: #724ae8;
+      border-radius: 4px;
+      margin: 0 10px 7px 0;
+    }
+
+    .chatbox .chat p {
+      white-space: pre-wrap;
+      padding: 12px 16px;
+      border-radius: 10px 10px 0 10px;
+      max-width: 75%;
+      color: #fff;
+      font-size: 0.95rem;
+      background: #724ae8;
+    }
+
+    .chatbox .incoming p {
+      border-radius: 10px 10px 10px 0;
+    }
+
+    .chatbox .chat p.error {
+      color: #721c24;
+      background: #f8d7da;
+    }
+
+    .chatbox .incoming p {
+      color: #000;
+      background: #f2f2f2;
+    }
+
+    .chatbot .chat-input {
+      display: flex;
+      gap: 5px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      padding: 3px 20px;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input textarea {
+      height: 55px;
+      width: 100%;
+      border: none;
+      outline: none;
+      resize: none;
+      max-height: 180px;
+      padding: 15px 15px 15px 0;
+      font-size: 0.95rem;
+    }
+
+    .chat-input span {
+      align-self: flex-end;
+      color: #724ae8;
+      cursor: pointer;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      visibility: hidden;
+      font-size: 1.35rem;
+    }
+
+    .chat-input textarea:valid~span {
+      visibility: visible;
+    }
+
+    .user-img {
+      display: inline-block;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      background: #2671ff;
+      margin: 0 10px 10px 0;
+    }
+
+    @media (max-width: 490px) {
+      .chatbot-toggler {
+        right: 20px;
+        bottom: 20px;
+      }
+
+      .chatbot {
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        border-radius: 0;
+        width: 100%;
+      }
+
+      .chatbot .chatbox {
+        height: 90%;
+        padding: 25px 15px 100px;
+      }
+
+      .chatbot .chat-input {
+        padding: 5px 15px;
+      }
+
+      .chatbot header span {
+        display: block;
+      }
+    }
   </style>
 
 </head>
@@ -410,14 +453,15 @@ header h2 {
       <div class="col-md-3">
         <div class="sidebar">
           <h3>Filters By Price </h3>
-           <form id="filter-form">
-          <div class="form-group">
-            <label for="max_price">Max Price:</label>
-            <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
-          </div>
-             <button type="button"  class="btn" style="vertical-align:middle" id="filter-button"><span>Filter </span></button>
+          <form id="filter-form">
+            <div class="form-group">
+              <label for="max_price">Max Price:</label>
+              <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
+            </div>
+            <button type="button" class="btn" style="vertical-align:middle" id="filter-button"><span>Filter
+              </span></button>
 
-                </form>
+          </form>
         </div>
       </div>
 
@@ -445,7 +489,7 @@ header h2 {
           </div>
         </div>
         <div class="container" id="results">
-            <!-- To be filled up bt JS! -->
+          <!-- To be filled up by JS! -->
         </div>
       </div>
     </div>
@@ -460,146 +504,136 @@ header h2 {
     var socket = new WebSocket("ws://" + window.location.host + "/ws/search/");
     var chatSocket = new WebSocket("ws://" + window.location.host + "/ws/chat/");
 
-    socket.onopen = function() {
+    socket.onopen = function () {
       // The WebSocket connection is open and ready.
       socket.send(JSON.stringify({ query: "{{ query }}" }));
       document.getElementById('custom-loader').classList.remove('hidden');
     };
 
     socket.onmessage = function (e) {
-        var data = JSON.parse(e.data);
-        if (data.type == "finished") {
-          document.getElementById('custom-loader').classList.add('hidden');
-        } else {
-          var results = document.getElementById("results");
-          var items = data.items
+      var data = JSON.parse(e.data);
+      if (data.type == "finished") {
+        document.getElementById('custom-loader').classList.add('hidden');
+      } else {
+        var results = document.getElementById("results");
+        var items = data.items
 
-          items.forEach((item) => {
-            // Create the outer div element
-            var outerDiv = document.createElement("div");
-            outerDiv.className = "item";
-            outerDiv.setAttribute("data-price", item.price);
+        items.forEach((item) => {
+          // Create the outer div element
+          var outerDiv = document.createElement("div");
+          outerDiv.className = "item";
+          outerDiv.setAttribute("data-price", item.price);
 
-            // Create the logo div and its child image
-            var logoDiv = document.createElement("div");
-            var logoImage = document.createElement("img");
-            logoImage.src = item.logo;
-            logoImage.alt = "Logo";
-            logoDiv.appendChild(logoImage);
+          // Create the logo div and its child image
+          var logoDiv = document.createElement("div");
+          var logoImage = document.createElement("img");
+          logoImage.src = item.logo;
+          logoImage.alt = "Logo";
+          logoDiv.appendChild(logoImage);
 
-            // Create the link to the product image
-            var productImageLink = document.createElement("a");
-            productImageLink.href = item.link;
-            var productImage = document.createElement("img");
-            productImage.src = item.image;
-            productImage.alt = item.title;
-            productImageLink.appendChild(productImage);
+          // Create the link to the product image
+          var productImageLink = document.createElement("a");
+          productImageLink.href = item.link;
+          var productImage = document.createElement("img");
+          productImage.src = item.image;
+          productImage.alt = item.title;
+          productImageLink.appendChild(productImage);
 
-            // Create the item title link
-            var itemTitleLink = document.createElement("a");
-            itemTitleLink.className = "item-title";
-            itemTitleLink.href = item.link;
-            itemTitleLink.textContent = item.title;
+          // Create the item title link
+          var itemTitleLink = document.createElement("a");
+          itemTitleLink.className = "item-title";
+          itemTitleLink.href = item.link;
+          itemTitleLink.textContent = item.title;
 
-            // Create the item price div
-            var itemPriceDiv = document.createElement("div");
-            itemPriceDiv.className = "item-price";
-            itemPriceDiv.textContent = item.price;
+          // Create the item price div
+          var itemPriceDiv = document.createElement("div");
+          itemPriceDiv.className = "item-price";
+          itemPriceDiv.textContent = item.price;
 
-            // Append the child elements to the outer div
-            outerDiv.appendChild(logoDiv);
-            outerDiv.appendChild(productImageLink);
-            outerDiv.appendChild(itemTitleLink);
-            outerDiv.appendChild(itemPriceDiv);
+          // Append the child elements to the outer div
+          outerDiv.appendChild(logoDiv);
+          outerDiv.appendChild(productImageLink);
+          outerDiv.appendChild(itemTitleLink);
+          outerDiv.appendChild(itemPriceDiv);
 
-            // Append the outer div to the document's body or any other desired parent element
-            results.appendChild(outerDiv);
-          })
-        }
+          // Append the outer div to the document's body or any other desired parent element
+          results.appendChild(outerDiv);
+        })
+      }
     };
 
     const chatbotToggler = document.querySelector(".chatbot-toggler");
-const closeBtn = document.querySelector(".close-btn");
-const chatbox = document.querySelector(".chatbox");
-const chatInput = document.querySelector(".chat-input textarea");
-const sendChatBtn = document.querySelector(".chat-input span");
+    const closeBtn = document.querySelector(".close-btn");
+    const chatbox = document.querySelector(".chatbox");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector(".chat-input span");
 
-let userMessage = null; // Variable to store user's message
-let waitingResponse = null
-<!--const API_KEY = "PASTE-YOUR-API-KEY"; // Paste your API key here-->
-const inputInitHeight = chatInput.scrollHeight;
+    let userMessage = null; // Variable to store user's message
+    let waitingResponse = null
+    const inputInitHeight = chatInput.scrollHeight;
 
-const createChatLi = (message, className) => {
-    // Create a chat <li> element with passed message and className
-    const chatLi = document.createElement("li");
-    chatLi.classList.add("chat", `${className}`);
-    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
-    chatLi.innerHTML = chatContent;
-    chatLi.querySelector("p").textContent = message;
-    return chatLi; // return chat <li> element
-}
+    const createChatLi = (message, className) => {
+      // Create a chat <li> element with passed message and className
+      const chatLi = document.createElement("li");
+      chatLi.classList.add("chat", `${className}`);
+      let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+      chatLi.innerHTML = chatContent;
+      chatLi.querySelector("p").textContent = message;
+      return chatLi; // return chat <li> element
+    }
 
-chatSocket.onmessage = function (e) {
-  var data = JSON.parse(e.data);
-  waitingResponse.textContent = data.response.trim();
-  chatbox.scrollTo(0, chatbox.scrollHeight);
-}
+    chatSocket.onmessage = function (e) {
+      var data = JSON.parse(e.data);
+      waitingResponse.textContent = data.response.trim();
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
 
-const generateResponse = (chatElement) => {
-    // const API_URL = "https://api.openai.com/v1/chat/completions";
-    const messageElement = chatElement.querySelector("p");
+    const generateResponse = (chatElement) => {
+      const messageElement = chatElement.querySelector("p");
 
-    chatSocket.send(JSON.stringify({ query: userMessage }));
-    waitingResponse = messageElement
+      chatSocket.send(JSON.stringify({ query: userMessage }));
+      waitingResponse = messageElement
+    }
 
-    // Send POST request to API, get response and set the reponse as paragraph text
-    // fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-    //     messageElement.textContent = data.choices[0].message.content.trim();
-    // }).catch(() => {
-    //     messageElement.classList.add("error");
-    //     messageElement.textContent = "Oops! Something went wrong. Please try again.";
-    // }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-}
+    const handleChat = () => {
+      userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+      if (!userMessage) return;
 
-const handleChat = () => {
-    userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
-    if(!userMessage) return;
+      // Clear the input textarea and set its height to default
+      chatInput.value = "";
+      chatInput.style.height = `${inputInitHeight}px`;
 
-    // Clear the input textarea and set its height to default
-    chatInput.value = "";
-    chatInput.style.height = `${inputInitHeight}px`;
+      // Append the user's message to the chatbox
+      chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+      chatbox.scrollTo(0, chatbox.scrollHeight);
 
-    // Append the user's message to the chatbox
-    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatbox.scrollTo(0, chatbox.scrollHeight);
-
-    setTimeout(() => {
+      setTimeout(() => {
         // Display "Thinking..." message while waiting for the response
         const incomingChatLi = createChatLi("Thinking...", "incoming");
         chatbox.appendChild(incomingChatLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
         generateResponse(incomingChatLi);
-    }, 600);
-}
+      }, 600);
+    }
 
-chatInput.addEventListener("input", () => {
-    // Adjust the height of the input textarea based on its content
-    chatInput.style.height = `${inputInitHeight}px`;
-    chatInput.style.height = `${chatInput.scrollHeight}px`;
-});
+    chatInput.addEventListener("input", () => {
+      // Adjust the height of the input textarea based on its content
+      chatInput.style.height = `${inputInitHeight}px`;
+      chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
 
-chatInput.addEventListener("keydown", (e) => {
-    // If Enter key is pressed without Shift key and the window
-    // width is greater than 800px, handle the chat
-    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    chatInput.addEventListener("keydown", (e) => {
+      // If Enter key is pressed without Shift key and the window
+      // width is greater than 800px, handle the chat
+      if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleChat();
-    }
-});
+      }
+    });
 
-sendChatBtn.addEventListener("click", handleChat);
-closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
-chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+    sendChatBtn.addEventListener("click", handleChat);
+    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
 
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
