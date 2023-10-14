@@ -33,7 +33,12 @@ def scrape_ryans(query):
             price = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[2]/p[3]')
             image = driver.find_element(By.XPATH, f'//*[@id="search-box-html"]/div[4]/div/div/div[{item_id}]/div[1]/div[1]/a/img').get_attribute('src')
             link = title.get_attribute('href')
-           
+
+            query_set = set(query.lower().split())
+            title_set = set(title.get_attribute('title').lower().split())
+            if not query_set.issubset(title_set):
+                raise Exception("Query doesn't match")
+
             if (price.text == "Tk 0" ):
                 continue
 

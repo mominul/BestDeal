@@ -38,7 +38,10 @@ def scrape_pickaboo(query):
             price = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a/div/div/div[2]/p/span')
             image = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a/div/div/div[1]/img').get_attribute('src')
             link = title.get_attribute('href')
-
+            query_set = set(query.lower().split())
+            title_set = set(title.text.lower().split())
+            if not query_set.issubset(title_set):
+                raise Exception("Query doesn't match")
             search_results.append({
                 "title": title.text,
                 "price": price.text,

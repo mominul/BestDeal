@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import os
 
-def collect_items(browser):
+def collect_items(browser, query):
     results = []
     logo = './static/daraz.png'
     items = browser.find_elements(By.XPATH, '//div[starts-with(@data-qa-locator, "product-item")]')
@@ -14,7 +14,10 @@ def collect_items(browser):
             price = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[2]/div[3]/span')
             image = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[1]/div/a/img').get_attribute('src')
             link = title.get_attribute('href')
-
+            query_set = set(query.lower().split())
+            title_set = set(title.text.lower().split())
+            if not query_set.issubset(title_set):
+                raise Exception("Query doesn't match")
             results.append({
                 "title": title.text,
                 "price": price.text,
@@ -46,7 +49,7 @@ def scrape_daraz(query):
 
     # Scrape atleast first three pages
     for _ in range(0, 3):
-        results += collect_items(browser)
+        results += collect_items(browser, query)
 
         try:
             # Click on next page
