@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import re
 import os
 
 def collect_items(browser, query):
@@ -14,10 +15,10 @@ def collect_items(browser, query):
             price = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[2]/div[3]/span')
             image = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[1]/div/a/img').get_attribute('src')
             link = title.get_attribute('href')
-            query_set = set(query.lower().split())
-            title_set = set(title.text.lower().split())
-            if not query_set.issubset(title_set):
-                raise Exception("Query doesn't match")
+            pattern = query.replace(" ", ".+")
+            pattern = f".+{pattern}.+"
+            if not re.match(pattern, title.text, re.IGNORECASE):
+                continue
             results.append({
                 "title": title.text,
                 "price": price.text,
