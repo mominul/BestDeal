@@ -13,18 +13,29 @@ BestDeal is a powerful Comparative Shopping Web Application that empowers users 
 6. Chatbot Integration: Real-time chatbot assistance for product inquiries and recommendations.
 
 ## Technology Stack
-1. Backend : Python (Django), Python (LangChain)
-2. Frontend : HTML, CSS, JavaScript
+* Django
+* Selenium
+* Websockets (`channels` package)
+* GPT4ALL
 
-### Running the project
+## Running the project
+### Dependencies
+```
+pip install django selenium daphne channels
+```
+### Setting up the environment
 Set the environment variable `BROWSER` to the path of the Brave browser.
 #### For Windows
-```
+```cmd
 set BROWSER="path/to/brave"
 ```
 
 #### For macOS (Fish shell)
 ```
-set -Ux BROWSER '/Applications/Brave Browser.app
-/Contents/MacOS/Brave Browser'
+set -Ux BROWSER '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
+```
+
+#### For Bash (Linux/Unix/macOS)
+```bash
+export BROWSER="path/to/brave"
 ```
