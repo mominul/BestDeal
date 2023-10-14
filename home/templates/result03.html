@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -159,6 +159,40 @@
         height: auto;
       }
     }
+
+        /* Create the loading spinner */
+        .custom-loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .custom-loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: custom-spin 2s linear infinite;
+        }
+
+        /* Keyframes for the spinning animation */
+        @keyframes custom-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide the loader by default */
+        .custom-loader-container.hidden {
+            display: none;
+        }
   </style>
 
 </head>
@@ -182,21 +216,79 @@
 
 
       <div class="col-md-9">
-        <div class="container">
-            {% for item in items %}
-             <div class="item" data-price="{{ item.price }}">
-            <div class="logo">
-                <img src="{{ item.logo }}" alt="Logo">
-            </div>
-            <a href="{{ item.link }}"><img src="{{ item.image }}" alt="{{ item.title }}"></a>
-           <a class="item-title" href="{{ item.link }}">{{ item.title }}</a>
-           <div class="item-price">{{ item.price }}</div>
-        </div>
-             {% endfor %}
+        <div class="container" id="results">
+            <!-- To be filled up bt JS! -->
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Loading spinner container with custom classes (hidden by default) -->
+  <div class="custom-loader-container hidden" id="custom-loader">
+    <div class="custom-loader"></div>
+  </div>
+
+  <script>
+    var socket = new WebSocket("ws://" + window.location.host + "/ws/search/");
+
+    socket.onopen = function() {
+      // The WebSocket connection is open and ready.
+      socket.send(JSON.stringify({ query: "{{ query }}" }));
+      document.getElementById('custom-loader').classList.remove('hidden');
+    };
+
+    socket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        if (data.type == "finished") {
+          document.getElementById('custom-loader').classList.add('hidden');
+        } else {
+          var results = document.getElementById("results");
+          var items = data.items
+
+          items.forEach((item) => {
+            // Create the outer div element
+            var outerDiv = document.createElement("div");
+            outerDiv.className = "item";
+            outerDiv.setAttribute("data-price", item.price);
+
+            // Create the logo div and its child image
+            var logoDiv = document.createElement("div");
+            var logoImage = document.createElement("img");
+            logoImage.src = item.logo;
+            logoImage.alt = "Logo";
+            logoDiv.appendChild(logoImage);
+
+            // Create the link to the product image
+            var productImageLink = document.createElement("a");
+            productImageLink.href = item.link;
+            var productImage = document.createElement("img");
+            productImage.src = item.image;
+            productImage.alt = item.title;
+            productImageLink.appendChild(productImage);
+
+            // Create the item title link
+            var itemTitleLink = document.createElement("a");
+            itemTitleLink.className = "item-title";
+            itemTitleLink.href = item.link;
+            itemTitleLink.textContent = item.title;
+
+            // Create the item price div
+            var itemPriceDiv = document.createElement("div");
+            itemPriceDiv.className = "item-price";
+            itemPriceDiv.textContent = item.price;
+
+            // Append the child elements to the outer div
+            outerDiv.appendChild(logoDiv);
+            outerDiv.appendChild(productImageLink);
+            outerDiv.appendChild(itemTitleLink);
+            outerDiv.appendChild(itemPriceDiv);
+
+            // Append the outer div to the document's body or any other desired parent element
+            results.appendChild(outerDiv);
+          })
+        }
+    };
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
