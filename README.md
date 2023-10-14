@@ -13,10 +13,17 @@ BestDeal is a powerful Comparative Shopping Web Application that empowers users 
 6. Chatbot Integration: Real-time chatbot assistance for product inquiries and recommendations.
 
 ## Technology Stack
-1. Backend : Python (Django), Python (LangChain)
-2. Frontend : HTML, CSS, JavaScript
+* Django
+* Selenium
+* Websockets (`channels` package)
+* GPT4ALL
 
-### Running the project
+## Running the project
+### Dependencies
+```
+pip install django selenium daphne channels
+```
+### Setting up the environment
 Set the environment variable `BROWSER` to the path of the Brave browser.
 #### For Windows
 ```
