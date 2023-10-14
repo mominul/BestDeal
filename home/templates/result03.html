@@ -218,6 +218,7 @@
   border-radius: 50%;
   background: #724ae8;
   transition: all 0.2s ease;
+  z-index: 1000;
 }
 body.show-chatbot .chatbot-toggler {
   transform: rotate(90deg);
@@ -250,6 +251,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
   box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
               0 32px 64px -48px rgba(0,0,0,0.5);
   transition: all 0.1s ease;
+  z-index: 1000;
 }
 body.show-chatbot .chatbot {
   opacity: 1;
@@ -456,11 +458,12 @@ header h2 {
 
   <script>
     var socket = new WebSocket("ws://" + window.location.host + "/ws/search/");
+    var chatSocket = new WebSocket("ws://" + window.location.host + "/ws/chat/");
 
     socket.onopen = function() {
       // The WebSocket connection is open and ready.
-      // socket.send(JSON.stringify({ query: "{{ query }}" }));
-      // document.getElementById('custom-loader').classList.remove('hidden');
+      socket.send(JSON.stringify({ query: "{{ query }}" }));
+      document.getElementById('custom-loader').classList.remove('hidden');
     };
 
     socket.onmessage = function (e) {
@@ -522,6 +525,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
+let waitingResponse = null
 <!--const API_KEY = "PASTE-YOUR-API-KEY"; // Paste your API key here-->
 const inputInitHeight = chatInput.scrollHeight;
 
@@ -535,30 +539,26 @@ const createChatLi = (message, className) => {
     return chatLi; // return chat <li> element
 }
 
+chatSocket.onmessage = function (e) {
+  var data = JSON.parse(e.data);
+  waitingResponse.textContent = data.response.trim();
+  chatbox.scrollTo(0, chatbox.scrollHeight);
+}
+
 const generateResponse = (chatElement) => {
-    const API_URL = "https://api.openai.com/v1/chat/completions";
+    // const API_URL = "https://api.openai.com/v1/chat/completions";
     const messageElement = chatElement.querySelector("p");
 
-    // Define the properties and message for the API request
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userMessage}],
-        })
-    }
+    chatSocket.send(JSON.stringify({ query: userMessage }));
+    waitingResponse = messageElement
 
     // Send POST request to API, get response and set the reponse as paragraph text
-    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-        messageElement.textContent = data.choices[0].message.content.trim();
-    }).catch(() => {
-        messageElement.classList.add("error");
-        messageElement.textContent = "Oops! Something went wrong. Please try again.";
-    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+    // fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+    //     messageElement.textContent = data.choices[0].message.content.trim();
+    // }).catch(() => {
+    //     messageElement.classList.add("error");
+    //     messageElement.textContent = "Oops! Something went wrong. Please try again.";
+    // }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 }
 
 const handleChat = () => {

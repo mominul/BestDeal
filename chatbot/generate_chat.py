@@ -18,8 +18,7 @@ You are a marketing specialist. you have to suggest products based on this list:
 """
 
 def chatgen(query):
-    with model.chat_session(template) as session:
-        # print(session)
+    with model.chat_session(system_template) as session:
         user_input= query
         response = model.generate(prompt=user_input, max_tokens=1000)
         response = model.current_chat_session[-1]['content']
