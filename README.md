@@ -26,12 +26,16 @@ pip install django selenium daphne channels
 ### Setting up the environment
 Set the environment variable `BROWSER` to the path of the Brave browser.
 #### For Windows
-```
+```cmd
 set BROWSER="path/to/brave"
 ```
 
 #### For macOS (Fish shell)
 ```
-set -Ux BROWSER '/Applications/Brave Browser.app
-/Contents/MacOS/Brave Browser'
+set -Ux BROWSER '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser'
+```
+
+#### For Bash (Linux/Unix/macOS)
+```bash
+export BROWSER="path/to/brave"
 ```
