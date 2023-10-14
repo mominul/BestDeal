@@ -1,9 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import re
 import os
 
-def collect_items(browser):
+def collect_items(browser, regex):
     results = []
     logo = './static/daraz.png'
     items = browser.find_elements(By.XPATH, '//div[starts-with(@data-qa-locator, "product-item")]')
@@ -11,10 +12,13 @@ def collect_items(browser):
     for item_id in range(1, items):
         try:
             title = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[2]/div[2]/a')
+            # Check the title
+            if not regex.match(title.text):
+                continue
             price = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[2]/div[3]/span')
             image = browser.find_element(By.XPATH, f'//div[starts-with(@data-qa-locator, "product-item")][{item_id}]/div[1]/div/div[1]/div/a/img').get_attribute('src')
             link = title.get_attribute('href')
-
+            
             results.append({
                 "title": title.text,
                 "price": price.text,
@@ -41,12 +45,15 @@ def scrape_daraz(query):
     results = []
     
     encoded_query = query.replace(" ", "%20")
+    pattern = query.replace(" ", ".+")
+    pattern = f".+{pattern}.+"
+    regex = re.compile(pattern, re.IGNORECASE)
 
     browser.get(f'https://www.daraz.com.bd/catalog/?q={encoded_query}')
 
     # Scrape atleast first three pages
     for _ in range(0, 3):
-        results += collect_items(browser)
+        results += collect_items(browser, regex)
 
         try:
             # Click on next page
