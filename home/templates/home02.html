@@ -1,9 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
     <title>Search Page</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,7 +18,8 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1; /* Place the video behind other content */
+            z-index: -1;
+            /* Place the video behind other content */
         }
 
         #background-video {
@@ -25,7 +28,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure video covers the entire container */
+            object-fit: cover;
+            /* Ensure video covers the entire container */
         }
 
         body {
@@ -34,12 +38,14 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: rgba(241, 234, 234, 0.5); /* Add a semi-transparent background overlay */
+            background-color: rgba(241, 234, 234, 0.5);
+            /* Add a semi-transparent background overlay */
         }
 
         .search-container {
             text-align: center;
-            color: #109d9d; /* Set text color for better visibility */
+            color: #109d9d;
+            /* Set text color for better visibility */
         }
 
         .search-input {
@@ -48,8 +54,10 @@
             width: 50%;
             border: none;
             border-radius: 10px;
-            background-color: rgba(212, 234, 234, 0.8); /* Add a semi-transparent background for the input */
-            color: #333; /* Set text color for input */
+            background-color: rgba(212, 234, 234, 0.8);
+            /* Add a semi-transparent background for the input */
+            color: #333;
+            /* Set text color for input */
         }
 
         .search-button {
@@ -63,7 +71,8 @@
         }
 
         .search-button:hover {
-            background-color: #0a7d7d; /* Change color on hover */
+            background-color: #0a7d7d;
+            /* Change color on hover */
         }
 
         h1 {
@@ -71,6 +80,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Video container with video element -->
     <div class="video-container">
@@ -89,7 +99,8 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="input-group mb-2">
-                        <input type="text" id="search" name="search" class="form-control search-input" placeholder="Enter product name...">
+                        <input type="text" id="search" name="search" class="form-control search-input"
+                            placeholder="Enter product name...">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-info search-button">Search</button>
                         </div>
@@ -111,4 +122,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
