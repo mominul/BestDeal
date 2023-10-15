@@ -71,7 +71,7 @@ body {
 
 .wrapper .form-fields input {
     width: 100%;
-    margin-right: 81px;
+    /* margin-right: 81px; */
     outline: none;
     border: none;
     background: none;
