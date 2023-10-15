@@ -78,6 +78,29 @@
         h1 {
             font-size: 36px;
         }
+
+
+        
+.logo-container {
+    position: relative;
+}
+
+.logo {
+    width: 100px; /* Set the desired width for your logo */
+    height: auto; /* Maintain the aspect ratio */
+    transition: transform 0.3s ease-in-out; /* Add a transition for animation */
+    animation: bounce 2s infinite alternate; /* Add the bounce animation */
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-15px); /* Adjust the value to control the bounce height */
+    }
+}
+
     </style>
 </head>
 
@@ -106,6 +129,12 @@
                         </div>
                     </div>
                 </form>
+                <div class="logo-container">
+                    <img src="{% static 'daraz.png' %}" alt="Your Logo" class="logo">
+                    <img src="{% static 'ryans.png' %}" alt="Your Logo" class="logo">
+                    <img src="{% static 'startech.png' %}" alt="Your Logo" class="logo">
+                    <img src="{% static 'pickaboo.png' %}" alt="Your Logo" class="logo">
+                </div>
             </div>
         </div>
     </div>
