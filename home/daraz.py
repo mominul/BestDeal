@@ -57,7 +57,7 @@ def scrape_daraz(query):
 
         try:
             # Click on next page
-            browser.find_element(By.XPATH, f'//*[@id="root"]/div/div[2]/div/div/div[1]/div[3]/div/ul/li[9]/a').click()
+            browser.find_element(By.XPATH, '//*[@id="root"]/div/div[3]/div/div/div[1]/div[3]/div/div/ul/li[9]/a').click()
         except:
             print("[Daraz] Error occured while finding the next button")
             break
