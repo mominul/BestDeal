@@ -19,7 +19,22 @@ class SearchConsumer(JsonWebsocketConsumer):
         self.accept()
 
     def disconnect(self, close_code):
-        pass
+        
+        for task in self.tasks:
+            if task.is_alive():
+                print('Process is alive, killing it')
+                task.kill()
+                print('Killed')
+                try:
+                    task.close()
+                except ValueError:
+                    print('Value error is raised during closing a process')
+                print('Closed')
+        self.disconnect(close_code)
+
+    def websocket_disconnect(self, message):
+        print("ws Disconnect 2")
+        super().websocket_disconnect(message)
 
     def receive_json(self, content):
         query = content['query']
@@ -27,14 +42,14 @@ class SearchConsumer(JsonWebsocketConsumer):
         # Create a multiprocessing queue to collect the results
         results_queue = Queue()
 
-        tasks = [
+        self.tasks = [
             Process(target=scrape_website, args=(query, scrape_ryans, results_queue)),
             Process(target=scrape_website, args=(query, scrape_daraz, results_queue)),
             Process(target=scrape_website, args=(query, scrape_startech, results_queue)),
             Process(target=scrape_website, args=(query, scrape_pickaboo, results_queue)),
         ]
 
-        for task in tasks:
+        for task in self.tasks:
             task.start()
         
         sources = 0
@@ -56,6 +71,6 @@ class SearchConsumer(JsonWebsocketConsumer):
             "type": "finished",
         })
 
-        for task in tasks:
+        for task in self.tasks:
             task.join()
 
