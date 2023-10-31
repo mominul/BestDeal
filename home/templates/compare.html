@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -445,6 +446,7 @@
     }
   </style>
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #081621;">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -456,9 +458,9 @@
           <button class="bt" type="submit">Home</button>
         </a>
       </ul>
-      <form method="POST" class="form-inline my-4  my-lg-0">
+      <form method="POST" action="/" class="form-inline my-4  my-lg-0">
         {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search">
         <button type="submit" class="bt bt-info search-button">Search</button>
       </form>
     </div>
@@ -467,20 +469,20 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-      <div class="sidebar">
-        <h3>Filters By Price </h3>
-        <form id="filter-form">
-          <div class="form-group">
-            <label for="max_price">Max Price:</label>
-            <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
-          </div>
-          <button type="button" class="btn" style="vertical-align:middle" id="filter-button"><span>Filter
-            </span></button>
+        <div class="sidebar">
+          <h3>Filters By Price </h3>
+          <form id="filter-form">
+            <div class="form-group">
+              <label for="max_price">Max Price:</label>
+              <input type="number" class="form-control" id="max_price" name="max_price" placeholder="Max">
+            </div>
+            <button type="button" class="btn" style="vertical-align:middle" id="filter-button"><span>Filter
+              </span></button>
 
-        </form>
+          </form>
 
+        </div>
       </div>
-    </div>
 
       <div class="col-md-9">
         <!-- Chatbot -->
