@@ -6,7 +6,7 @@ import os
 
 def collect_items(browser, regex):
     results = []
-    logo = './static/daraz.png'
+    logo = 'daraz.png'
     items = browser.find_elements(By.XPATH, '//div[starts-with(@data-qa-locator, "product-item")]')
     items = len(items)
     for item_id in range(1, items):

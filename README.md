@@ -21,7 +21,7 @@ BestDeal is a powerful Comparative Shopping Web Application that empowers users 
 ## Running the project
 ### Dependencies
 ```
-pip install django selenium daphne channels
+pip install django selenium daphne channels strsimpy
 ```
 ### Setting up the environment
 #### Download Orca Mini Model

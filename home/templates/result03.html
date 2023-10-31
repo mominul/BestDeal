@@ -450,7 +450,7 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      {% comment %} <div class="col-md-3">
         <div class="sidebar">
           <h3>Filters By Price </h3>
           <form id="filter-form">
@@ -463,15 +463,15 @@
 
           </form>
         </div>
-      </div>
+      </div> {% endcomment %}
 
 
       <div class="col-md-9">
-        <button class="chatbot-toggler">
+        {% comment %} <button class="chatbot-toggler">
           <span class="material-symbols-rounded">mode_comment</span>
           <span class="material-symbols-outlined">close</span>
-        </button>
-        <div class="chatbot">
+        </button> {% endcomment %}
+        {% comment %} <div class="chatbot">
           <header>
             <h2>Chatbot</h2>
             <span class="close-btn material-symbols-outlined">close</span>
@@ -487,7 +487,7 @@
             <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
             <span id="send-btn" class="material-symbols-rounded">send</span>
           </div>
-        </div>
+        </div> {% endcomment %}
         <div class="container" id="results">
           <!-- To be filled up by JS! -->
         </div>
@@ -500,9 +500,16 @@
     <div class="custom-loader"></div>
   </div>
 
+  <!-- Hidden form to send data -->
+  <form id="sender" action="/compare/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="jsonData" id="jsonData">
+  </form>
+
   <script>
     var socket = new WebSocket("ws://" + window.location.host + "/ws/search/");
     var chatSocket = new WebSocket("ws://" + window.location.host + "/ws/chat/");
+    let totalItems = [];
 
     socket.onopen = function () {
       // The WebSocket connection is open and ready.
@@ -514,11 +521,18 @@
       var data = JSON.parse(e.data);
       if (data.type == "finished") {
         document.getElementById('custom-loader').classList.add('hidden');
+        console.log(totalItems)
+        // Set the JSON data in the hidden form field
+        document.getElementById('jsonData').value = JSON.stringify(totalItems);
+
+        // Submit the form
+        document.getElementById('sender').submit();
       } else {
         var results = document.getElementById("results");
         var items = data.items
 
         items.forEach((item) => {
+          totalItems.push(item)
           // Create the outer div element
           var outerDiv = document.createElement("div");
           outerDiv.className = "item";
@@ -529,7 +543,7 @@
           logoDiv.className = "logo";
 
           var logoImage = document.createElement("img");
-          logoImage.src = item.logo;
+          logoImage.src = "./static/" + item.logo;
           logoImage.alt = "Logo";
           logoDiv.appendChild(logoImage);
 

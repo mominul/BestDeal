@@ -24,7 +24,7 @@ def scrape_pickaboo(query):
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div')))
     # Create a list to store search results
     search_results = []
-    logo = './static/pickaboo.png'
+    logo = 'pickaboo.png'
 
     # Now, you can collect all the search results
     result_elements = driver.find_elements(By.XPATH, '//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div')
@@ -37,7 +37,7 @@ def scrape_pickaboo(query):
             title = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a/div/div/div[2]/h4')
             price = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a/div/div/div[2]/p/span')
             image = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a/div/div/div[1]/img').get_attribute('src')
-            link = title.get_attribute('href')
+            link = driver.find_element(By.XPATH, f'//*[@id="__next"]/main/section/div[2]/div/div[2]/div[2]/div[{item_id}]/div/a').get_attribute('href')
 
             search_results.append({
                 "title": title.text,

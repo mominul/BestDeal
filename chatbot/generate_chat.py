@@ -4,7 +4,7 @@ import os
 model_name = 'orca-mini-3b.ggmlv3.q4_0.bin'
 model_path = os.environ['MODEL']
 
-model = GPT4All(model_name=model_name, model_path=model_path)
+# model = GPT4All(model_name=model_name, model_path=model_path)
 
 prompt_template = "I'm looking to purchase a new SSD and I'm deciding between two options:\n" \
                   "1. Samsung 970 SSD, which has NVMe M.2 interface and offers a read speed of 3100 MB/s and a write speed of 2300 MB/s.\n" \

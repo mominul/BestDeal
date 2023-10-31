@@ -22,7 +22,7 @@ def scrape_startech(query):
 
     # Create a list to store search results
     search_results = []
-    logo = './static/startech.png'
+    logo = 'startech.png'
 
     # Now, you can collect all the search results
     result_elements = driver.find_elements(By.XPATH, '//*[@id="content"]/div[2]/div')
