@@ -8,8 +8,8 @@ from .pickaboo import scrape_pickaboo
 def scrape_website(query, website_func, results_queue):
     try:
         results = website_func(query)
-    except:
-        print('[Search Websocket] Exception occurred while scrapping!')
+    except Exception as e:
+        print('[Search Websocket] Exception occurred while scrapping!', e)
         pass
 
     results_queue.put(results)
@@ -31,14 +31,14 @@ class SearchConsumer(JsonWebsocketConsumer):
             Process(target=scrape_website, args=(query, scrape_ryans, results_queue)),
             Process(target=scrape_website, args=(query, scrape_daraz, results_queue)),
             Process(target=scrape_website, args=(query, scrape_startech, results_queue)),
-            Process(target=scrape_website, args=(query, scrape_pickaboo, results_queue)),
+            # Process(target=scrape_website, args=(query, scrape_pickaboo, results_queue)),
         ]
 
         for task in tasks:
             task.start()
         
         sources = 0
-        while sources < 4:
+        while sources < len(tasks):
             try:
                 items = results_queue.get()
                 # Send the data
