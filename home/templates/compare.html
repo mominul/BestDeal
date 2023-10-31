@@ -159,6 +159,16 @@
       z-index: 1;
       border-radius: 5px;
     }
+    .log {
+     /* background-color: #a4a4a4; */
+      position: static;
+      padding: 2px 1px 0px 0px;
+      top: 10px;
+      width: 80px;
+      height: 50px;
+      z-index: 1;
+      border-radius: 5px;
+    }
 
     @media (max-width: 767px) {
       .sidebar {
@@ -166,14 +176,56 @@
         height: auto;
       }
     }
-  </style>
+.nav-item {
+  color: #3b3486;
+}
 
+.bt{
+  display: inline-block;
+      border-radius: 5px;
+      background-color: rgb(45, 120, 194);
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 18 px;
+      width: 100px;
+      height: 40px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px auto;
+
+}
+.form-inline .form-control {
+    display: inline-block;
+    width: 30rem;
+    vertical-align: middle;
+}
+ 
+  </style>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #081621;">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <span>
+      <img src="{% static 'android-chrome-192x192.png' %}" alt="Your Logo" class="log">
+      </span>
+      <a href="{% url 'home' %}">
+      <button class="bt" type="submit">Home</button>
+   </a>
+    </ul>
+    <form method="POST" class="form-inline my-4  my-lg-0">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button type="submit" class="bt bt-info search-button">Search</button>
+    </form>
+  </div>
+</nav>
 </head>
 
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <!-- <div class="col-md-3"> -->
         <div class="sidebar">
           <h3>Filters By Price </h3>
           <form id="filter-form">
@@ -185,13 +237,17 @@
               </span></button>
 
           </form>
-        </div>
+        
       </div>
 
       
       <div class="col-md-9">
+
+        <div class="card-deck">
+          <div class="card">
+
         {% for segment in segments %}
-        <h3>Best Deals</h3>
+        <div class="card-header">BestDeal</div>
         <div class="container">
           {% for item in segment %}
           <div class="item" data-price="{{ item.price }}">
@@ -205,8 +261,13 @@
           {% endfor %}
         </div>
         {% endfor %}
-        
-        <h3>More</h3>
+          </div>
+        </div>
+        <br>
+        <div class="card-deck">
+          <div class="card">
+          <div class="card-header">More</div>
+
         <div class="container">
           {% for item in leftover %}
           <div class="item" data-price="{{ item.price }}">
@@ -220,7 +281,9 @@
           {% endfor %}
         </div>
       </div>
+        </div>
     </div>
+  </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
