@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/', logout_page, name='logout'),
     path('signup/', signup_view, name='signup'),
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', home, name='home'),
     path('chat/', chat_home, name='chat_home'),
     path('chat/clear', chat_clear, name="clear_chat"),
     path('compare/', compare)
