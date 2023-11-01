@@ -31,7 +31,7 @@ class SearchConsumer(JsonWebsocketConsumer):
             Process(target=scrape_website, args=(query, scrape_ryans, results_queue)),
             Process(target=scrape_website, args=(query, scrape_daraz, results_queue)),
             Process(target=scrape_website, args=(query, scrape_startech, results_queue)),
-            # Process(target=scrape_website, args=(query, scrape_pickaboo, results_queue)),
+            Process(target=scrape_website, args=(query, scrape_pickaboo, results_queue)),
         ]
 
         for task in tasks:
