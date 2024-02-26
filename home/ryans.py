@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import os
 
 def scrape_ryans(query):
@@ -22,6 +24,9 @@ def scrape_ryans(query):
     # Create a list to store search results
     search_results = []
     logo = 'ryans.png'
+
+    # Wait for the page to load
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div/div')))
 
     # Now, you can collect all the search results
     result_elements = driver.find_elements(By.XPATH, '//*[@id="search-box-html"]/div[4]/div/div/div')
