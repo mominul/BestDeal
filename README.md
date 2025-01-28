@@ -4,6 +4,12 @@ A Comparative Shopping Web Application
 
 BestDeal is a powerful Comparative Shopping Web Application that empowers users to find the best prices for products across various online platforms. With a user-friendly interface and robust web scraping capabilities, BestDeal simplifies the process of comparing prices, making informed purchasing decisions, and saving money. BestDeal offers seamless integration with a chatbot, enabling users to interact naturally and obtain real-time assistance for their shopping needs.
 
+<div style="display: flex; justify-content: space-around;">
+  <img src="images/Home.png" alt="Image 1" style="width: 30%;">
+  <img src="images/Search.png" alt="Image 2" style="width: 30%;">
+  <img src="images/Chatbot.png" alt="Image 3" style="width: 30%;">
+</div>
+
 ## Features
 1. Product Search: Users can search for products by keywords.
 2. Price Comparison: The application displays prices from various online retailers for the searched product.
@@ -46,4 +52,11 @@ set -Ux MODEL 'path/to/orcamini'
 ```bash
 export BROWSER="path/to/brave"
 export MODEL="path/to/orcamini"
+```
+
+### Running the project
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver 
 ```
